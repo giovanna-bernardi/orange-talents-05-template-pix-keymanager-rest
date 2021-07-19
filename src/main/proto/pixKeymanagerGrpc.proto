@@ -1,0 +1,128 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "br.com.zupacademy.giovanna";
+option java_outer_classname = "PixKeymanagerGrpc";
+
+package br.com.zupacademy.giovanna;
+
+import "google/protobuf/timestamp.proto";
+
+service PixKeyRegistrationManagerService {
+  rpc cadastra (CadastraChavePixRequest) returns (CadastraChavePixResponse) {}
+}
+
+service PixKeyExclusionManagerService {
+  rpc remove (RemoveChavePixRequest) returns (RemoveChavePixResponse) {}
+}
+
+service PixKeyDetailManagerService {
+  rpc consulta (DetalheChavePixRequest) returns (DetalheChavePixResponse){}
+}
+
+service PixKeyListManagerService {
+  rpc lista (ListaChavePixRequest) returns (ListaChavePixResponse){}
+}
+
+enum TipoConta {
+  UNKNOWN_CONTA = 0;
+  CONTA_CORRENTE = 1;
+  CONTA_POUPANCA = 2;
+}
+
+enum TipoChave {
+  UNKNOWN_CHAVE = 0;
+  CPF = 1;
+  CELULAR = 2;
+  EMAIL = 3;
+  ALEATORIA = 4;
+}
+
+/**
+ * Cadastra chave
+ */
+message CadastraChavePixRequest {
+  string clienteId = 1;
+  TipoChave tipoChave = 2;
+  string valorChave = 3;
+  TipoConta tipoConta = 4;
+}
+
+message CadastraChavePixResponse {
+  string pixId = 1;
+}
+
+/**
+ * Remove chave
+ */
+message RemoveChavePixRequest {
+  string pixId = 1;
+  string clienteId = 2;
+}
+
+message RemoveChavePixResponse {
+  bool removido = 1;
+}
+
+/**
+* Detalha a chave
+*/
+
+message DetalheChavePixRequest {
+  message KeyManager {
+    string pixId = 1;
+    string clienteId = 2;
+  }
+
+  // usuário só pode passar um deles.
+  // Dá para acessar como: tipoConsultaCase.SISTEMA_INTERNO
+  oneof tipoConsulta {
+    KeyManager sistemaInterno = 1; // por pixId e clienteId
+    string valorChave = 2; // por valor da chave
+  }
+}
+
+message DetalheChavePixResponse {
+
+  message ChaveInfo{
+
+    message ContaInfo{
+      string nomeTitular = 1;
+      string cpfTitular = 2;
+      string instituicao = 3;
+      string agencia = 4;
+      string numeroConta = 5;
+      TipoConta tipoConta = 6;
+    }
+
+    TipoChave tipoChave = 1;
+    string valorChave = 2;
+    ContaInfo conta = 3;
+    google.protobuf.Timestamp dataCadastro = 4;
+  }
+
+  string pixId = 1;
+  string clienteId = 2;
+  ChaveInfo chave = 3;
+}
+
+/**
+* Listas chaves de um cliente
+*/
+
+message ListaChavePixRequest {
+  string clienteId = 1;
+}
+
+message ListaChavePixResponse {
+  message ChavePix {
+    string pixId = 1;
+    TipoChave tipoChave = 2;
+    string valorChave = 3;
+    TipoConta tipoConta = 4;
+    google.protobuf.Timestamp dataCadastro = 5;
+  }
+
+  string clienteId = 1;
+  repeated ChavePix chaves = 2;
+}
