@@ -21,7 +21,7 @@ class GlobalExceptionHandler : ExceptionHandler<StatusRuntimeException, HttpResp
         val statusDescription = exception.status.description ?: ""
         val (httpStatus, message) = when (statusCode) {
             Status.NOT_FOUND.code -> Pair(HttpStatus.NOT_FOUND, statusDescription)
-            Status.INVALID_ARGUMENT.code -> Pair(HttpStatus.BAD_REQUEST, "Dados da requisição estão inválidos") // TODO: melhoria: extrair detalhes do erro
+            Status.INVALID_ARGUMENT.code -> Pair(HttpStatus.BAD_REQUEST, "Existem dados inválidos na requisição") // TODO: unpack details
             Status.ALREADY_EXISTS.code -> Pair(HttpStatus.UNPROCESSABLE_ENTITY, statusDescription)
             else ->  {
                 LOGGER.error("Erro inesperado '${exception.javaClass.name}' ao processar requisição", exception)
