@@ -27,15 +27,6 @@ internal class NovaChavePixControllerTest(private val grpcClient: PixKeyRegistra
     @field:Client("/")
     lateinit var httpClient: HttpClient
 
-    @Factory
-    @Replaces(factory = GrpcClientFactory::class) // substitui a fábrica da aplicação por essa mockada
-    internal class ClientsStubFactory {
-
-        @Singleton
-        fun stubMock() =
-            Mockito.mock(PixKeyRegistrationManagerServiceGrpc.PixKeyRegistrationManagerServiceBlockingStub::class.java)
-    }
-
     @Test
     internal fun `deve cadastrar uma nova chave pix`() {
         // cenário
@@ -90,5 +81,14 @@ internal class NovaChavePixControllerTest(private val grpcClient: PixKeyRegistra
         with(response) {
             assertEquals(HttpStatus.BAD_REQUEST, status)
        }
+    }
+
+    @Factory
+    @Replaces(factory = GrpcClientFactory::class) // substitui a fábrica da aplicação por essa mockada
+    internal class ClientsStubFactory {
+
+        @Singleton
+        fun cadastraChave() =
+            Mockito.mock(PixKeyRegistrationManagerServiceGrpc.PixKeyRegistrationManagerServiceBlockingStub::class.java)
     }
 }

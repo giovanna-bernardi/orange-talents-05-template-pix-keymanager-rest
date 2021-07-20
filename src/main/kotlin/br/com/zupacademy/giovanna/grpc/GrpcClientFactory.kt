@@ -1,5 +1,6 @@
 package br.com.zupacademy.giovanna.grpc
 
+import br.com.zupacademy.giovanna.PixKeyDetailManagerServiceGrpc
 import br.com.zupacademy.giovanna.PixKeyExclusionManagerServiceGrpc
 import br.com.zupacademy.giovanna.PixKeyRegistrationManagerServiceGrpc
 import io.grpc.ManagedChannel
@@ -15,5 +16,8 @@ class GrpcClientFactory(@GrpcChannel("keyManager") val channel: ManagedChannel) 
 
     @Singleton
     fun removeChave() = PixKeyExclusionManagerServiceGrpc.newBlockingStub(channel)
+
+    @Singleton
+    fun consultaChave() = PixKeyDetailManagerServiceGrpc.newBlockingStub(channel)
 
 }

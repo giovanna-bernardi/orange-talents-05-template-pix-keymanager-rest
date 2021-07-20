@@ -31,15 +31,6 @@ internal class RemoveChavePixControllerTest(private val grpcClient: PixKeyExclus
     @field:Client("/")
     lateinit var httpClient: HttpClient
 
-    @Factory
-    @Replaces(factory = GrpcClientFactory::class) // substitui a fábrica da aplicação por essa mockada
-    internal class ClientsStubFactory {
-
-        @Singleton
-        fun stubMock() =
-            Mockito.mock(PixKeyExclusionManagerServiceBlockingStub::class.java)
-    }
-
     @Test
     internal fun `deve remover chave existente do cliente`() {
 
@@ -60,5 +51,14 @@ internal class RemoveChavePixControllerTest(private val grpcClient: PixKeyExclus
 
         // validação
         assertEquals(HttpStatus.OK, response.status)
+    }
+
+    @Factory
+    @Replaces(factory = GrpcClientFactory::class) // substitui a fábrica da aplicação por essa mockada
+    internal class ClientsStubFactory {
+
+        @Singleton
+        fun removeChave() =
+            Mockito.mock(PixKeyExclusionManagerServiceBlockingStub::class.java)
     }
 }
