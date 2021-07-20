@@ -1,11 +1,8 @@
-package br.com.zupacademy.giovanna.pix
+package br.com.zupacademy.giovanna.pix.registration
 
 import br.com.zupacademy.giovanna.CadastraChavePixResponse
 import br.com.zupacademy.giovanna.PixKeyRegistrationManagerServiceGrpc
 import br.com.zupacademy.giovanna.grpc.GrpcClientFactory
-import br.com.zupacademy.giovanna.pix.registration.NovaChavePixRequest
-import br.com.zupacademy.giovanna.pix.registration.TipoChaveRequest
-import br.com.zupacademy.giovanna.pix.registration.TipoContaRequest
 import io.micronaut.context.annotation.Factory
 import io.micronaut.context.annotation.Replaces
 import io.micronaut.http.HttpRequest
@@ -66,6 +63,7 @@ internal class NovaChavePixControllerTest(private val grpcClient: PixKeyRegistra
         assertTrue(response.headers.contains("Location"))
         assertTrue(response.header("Location")!!.contains(pixId))
     }
+
     @Test
     internal fun `nao deve cadastrar quando valor da chave for nula`() {
         // cenário
@@ -87,7 +85,6 @@ internal class NovaChavePixControllerTest(private val grpcClient: PixKeyRegistra
         val response = assertThrows<HttpClientResponseException> {
             httpClient.toBlocking().exchange(request, NovaChavePixRequest::class.java)
         }
-
 
         // validação
         with(response) {
