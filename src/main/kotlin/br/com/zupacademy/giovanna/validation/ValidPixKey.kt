@@ -1,6 +1,6 @@
 package br.com.zupacademy.giovanna.validation
 
-import br.com.zupacademy.giovanna.pix.NovaChavePixRequest
+import br.com.zupacademy.giovanna.pix.registration.NovaChavePixRequest
 import io.micronaut.core.annotation.AnnotationValue
 import io.micronaut.validation.validator.constraints.ConstraintValidator
 import io.micronaut.validation.validator.constraints.ConstraintValidatorContext

@@ -17,6 +17,8 @@ class GlobalExceptionHandler : ExceptionHandler<StatusRuntimeException, HttpResp
 
     override fun handle(request: HttpRequest<*>, exception: StatusRuntimeException): HttpResponse<Any> {
 
+        // traduz os erros do gRPC para os erros do Http REST
+
         val statusCode = exception.status.code
         val statusDescription = exception.status.description ?: ""
         val (httpStatus, message) = when (statusCode) {

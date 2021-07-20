@@ -1,5 +1,6 @@
 package br.com.zupacademy.giovanna.grpc
 
+import br.com.zupacademy.giovanna.PixKeyExclusionManagerServiceGrpc
 import br.com.zupacademy.giovanna.PixKeyRegistrationManagerServiceGrpc
 import io.grpc.ManagedChannel
 import io.micronaut.context.annotation.Factory
@@ -11,5 +12,8 @@ class GrpcClientFactory(@GrpcChannel("keyManager") val channel: ManagedChannel) 
 
     @Singleton
     fun cadastraChave() = PixKeyRegistrationManagerServiceGrpc.newBlockingStub(channel)
+
+    @Singleton
+    fun removeChave() = PixKeyExclusionManagerServiceGrpc.newBlockingStub(channel)
 
 }

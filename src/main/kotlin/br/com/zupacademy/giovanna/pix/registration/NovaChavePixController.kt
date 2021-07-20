@@ -1,10 +1,9 @@
-package br.com.zupacademy.giovanna.pix
+package br.com.zupacademy.giovanna.pix.registration
 
 import br.com.zupacademy.giovanna.PixKeyRegistrationManagerServiceGrpc
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.annotation.Body
 import io.micronaut.http.annotation.Controller
-import io.micronaut.http.annotation.PathVariable
 import io.micronaut.http.annotation.Post
 import io.micronaut.validation.Validated
 import java.util.*

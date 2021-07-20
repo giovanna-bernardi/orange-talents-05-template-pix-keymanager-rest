@@ -3,6 +3,9 @@ package br.com.zupacademy.giovanna.pix
 import br.com.zupacademy.giovanna.CadastraChavePixResponse
 import br.com.zupacademy.giovanna.PixKeyRegistrationManagerServiceGrpc
 import br.com.zupacademy.giovanna.grpc.GrpcClientFactory
+import br.com.zupacademy.giovanna.pix.registration.NovaChavePixRequest
+import br.com.zupacademy.giovanna.pix.registration.TipoChaveRequest
+import br.com.zupacademy.giovanna.pix.registration.TipoContaRequest
 import io.micronaut.context.annotation.Factory
 import io.micronaut.context.annotation.Replaces
 import io.micronaut.http.HttpRequest
@@ -10,7 +13,6 @@ import io.micronaut.http.HttpStatus
 import io.micronaut.http.client.HttpClient
 import io.micronaut.http.client.annotation.Client
 import io.micronaut.http.client.exceptions.HttpClientResponseException
-import io.micronaut.http.hateoas.JsonError
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test

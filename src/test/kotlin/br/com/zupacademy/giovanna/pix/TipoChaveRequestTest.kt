@@ -1,5 +1,6 @@
 package br.com.zupacademy.giovanna.pix
 
+import br.com.zupacademy.giovanna.pix.registration.TipoChaveRequest
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test

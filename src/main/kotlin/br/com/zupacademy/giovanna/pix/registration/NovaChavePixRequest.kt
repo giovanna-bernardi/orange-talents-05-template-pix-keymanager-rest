@@ -1,4 +1,4 @@
-package br.com.zupacademy.giovanna.pix
+package br.com.zupacademy.giovanna.pix.registration
 
 import br.com.zupacademy.giovanna.CadastraChavePixRequest
 import br.com.zupacademy.giovanna.TipoChave
