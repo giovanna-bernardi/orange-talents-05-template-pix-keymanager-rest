@@ -1,7 +1,9 @@
 package br.com.zupacademy.giovanna.pix.detail
 
-import br.com.zupacademy.giovanna.*
-import br.com.zupacademy.giovanna.PixKeyDetailManagerServiceGrpc.*
+import br.com.zupacademy.giovanna.DetalheChavePixResponse
+import br.com.zupacademy.giovanna.PixKeyDetailManagerServiceGrpc.PixKeyDetailManagerServiceBlockingStub
+import br.com.zupacademy.giovanna.TipoChave
+import br.com.zupacademy.giovanna.TipoConta
 import br.com.zupacademy.giovanna.grpc.GrpcClientFactory
 import com.google.protobuf.Timestamp
 import io.micronaut.context.annotation.Factory
@@ -11,11 +13,11 @@ import io.micronaut.http.HttpStatus
 import io.micronaut.http.client.HttpClient
 import io.micronaut.http.client.annotation.Client
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Test
-import org.mockito.ArgumentMatchers
-import org.mockito.BDDMockito
-import org.mockito.BDDMockito.*
+import org.mockito.BDDMockito.any
+import org.mockito.BDDMockito.given
 import org.mockito.Mockito
 import java.time.LocalDateTime
 import java.time.ZoneId
