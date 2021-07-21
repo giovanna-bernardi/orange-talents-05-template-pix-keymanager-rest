@@ -52,7 +52,7 @@ class DetalheChaveResponse(detalheChave: DetalheChavePixResponse) {
         Pair("agencia", detalheChave.chave.conta.agencia),
         Pair("numeroConta", detalheChave.chave.conta.numeroConta))
 
-    val dataCadastro = detalheChave.chave.dataCadastro.let {
+    val criadaEm = detalheChave.chave.dataCadastro.let {
         LocalDateTime.ofInstant(Instant.ofEpochSecond(it.seconds, it.nanos.toLong()), ZoneOffset.UTC)
     }
 }
