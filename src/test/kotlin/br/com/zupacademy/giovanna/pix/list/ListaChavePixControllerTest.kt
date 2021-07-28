@@ -1,6 +1,5 @@
 package br.com.zupacademy.giovanna.pix.list
 
-import br.com.zupacademy.giovanna.ListaChavePixRequest
 import br.com.zupacademy.giovanna.ListaChavePixResponse
 import br.com.zupacademy.giovanna.PixKeyListManagerServiceGrpc.PixKeyListManagerServiceBlockingStub
 import br.com.zupacademy.giovanna.TipoChave
@@ -9,14 +8,10 @@ import br.com.zupacademy.giovanna.pix.util.PixKeyGenerator
 import io.micronaut.context.annotation.Factory
 import io.micronaut.context.annotation.Replaces
 import io.micronaut.http.HttpRequest
-import io.micronaut.http.HttpResponse
 import io.micronaut.http.HttpStatus
 import io.micronaut.http.client.HttpClient
 import io.micronaut.http.client.annotation.Client
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest
-import org.hamcrest.MatcherAssert
-import org.hamcrest.Matchers.containsInAnyOrder
-import org.hamcrest.Matchers.hasSize
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.mockito.BDDMockito.any
@@ -25,7 +20,6 @@ import org.mockito.Mockito
 import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
-import kotlin.collections.LinkedHashMap
 
 @MicronautTest
 internal class ListaChavePixControllerTest(private val grpcClient: PixKeyListManagerServiceBlockingStub) {
@@ -38,7 +32,6 @@ internal class ListaChavePixControllerTest(private val grpcClient: PixKeyListMan
     fun `deve listar as chaves do cliente quando existir`() {
         // Cenário
         val clienteId = UUID.randomUUID().toString()
-        val pixId = UUID.randomUUID().toString()
 
         // Ação
         val grpcResponse = listaChavePixResponse()
@@ -60,7 +53,6 @@ internal class ListaChavePixControllerTest(private val grpcClient: PixKeyListMan
     fun `deve retorna lista vazia quando cliente nao tiver chaves registradas`() {
 // Cenário
         val clienteId = UUID.randomUUID().toString()
-        val pixId = UUID.randomUUID().toString()
 
         // Ação
         val grpcResponse = ListaChavePixResponse.newBuilder()
